@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Bluebird",
+  "version": "1.0",
+
+  "description": "Reinstates the Twitter logo on twitter.com.",
+
+  "icons": {
+    "48": "icons/bluebird.svg",
+    "96": "icons/bluebird.svg"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.twitter.com/*"],
+      "js": ["bluebird.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
+
