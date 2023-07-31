@@ -20,6 +20,8 @@ function replaceFavicon () {
   }
 }
 
+replaceFavicon();
+
 function updateTitle () {
   if (document.title.endsWith("X")) {
     document.title = document.title.substring(0, document.title.lastIndexOf("X")) + "Twitter";
