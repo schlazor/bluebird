@@ -28,6 +28,12 @@ function updateTitle () {
   }
 }
 
+function postToTweet(target) {
+  if ( target != null && target.innerText == "Post" ) {
+    target.innerText = "Tweet";
+  }
+}
+
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
     const colorScheme = e.matches ? "dark" : "light";
     replaceFavicon();
@@ -77,5 +83,35 @@ function checkTitle() {
     clearInterval(titleInterval);
   }
 }
-
 titleInterval = setInterval(checkTitle, 1000)
+
+postBtnSelector = "span.r-1inkyih:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(1) > span:nth-child(1)";
+const postBtnConfig = { characterData: true, childList: true };
+const postBtnCallback = (postMutationList, postObserver) => {
+  postToTweet(document.querySelector(postBtnSelector));
+};
+const postBtnObserver = new MutationObserver(postBtnCallback);
+function checkPostBtn() {
+  postBtn = document.querySelector(postBtnSelector);
+  if (postBtn != null) {
+    postToTweet(postBtn);
+    postBtnObserver.observe(postBtn, postBtnConfig);
+    clearInterval(postBtnInterval);
+  }
+}
+postBtnInterval = setInterval(checkPostBtn, 1000)
+
+threadBtnSelector = "div.r-l5o3uw:nth-child(4) > div:nth-child(1) > span:nth-child(1) > span:nth-child(1)";
+const threadBtnConfig = { characterData: true, childList: true };
+const threadBtnCallback = (postMutationList, postObserver) => {
+  postToTweet(document.querySelector(threadBtnSelector));
+};
+const threadBtnObserver = new MutationObserver(threadBtnCallback);
+function checkThreadBtn() {
+  threadBtn = document.querySelector(threadBtnSelector);
+  if (threadBtn != null) {
+    postToTweet(threadBtn);
+    threadBtnObserver.observe(threadBtn, threadBtnConfig);
+  }
+}
+threadBtnInterval = setInterval(checkThreadBtn, 1000)
