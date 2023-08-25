@@ -23,8 +23,15 @@ function replaceFavicon () {
 replaceFavicon();
 
 function updateTitle () {
+
   if (document.title.endsWith("X")) {
     document.title = document.title.substring(0, document.title.lastIndexOf("X")) + "Twitter";
+  } else {
+    onX = " on X: \""
+    if (document.title.includes(onX)) {
+      onXIndex = document.title.indexOf(onX)
+      document.title = document.title.substring(0, onXIndex) + " on Twitter: \"" + document.title.substring(onXIndex + 8)
+    }
   }
 }
 
@@ -62,6 +69,10 @@ const reactCallback = (reactMutationList, reactObserver) => {
     if(path != null) {
       replaceLogo();
       reactObserver.disconnect();
+    }
+    verifiedBtn = document.querySelector("a[href=\"/i/verified-choose\"]");
+    if(verifiedBtn != null) {
+      verifiedBtn.style.display = 'none';
     }
   }
 };
@@ -115,3 +126,4 @@ function checkThreadBtn() {
   }
 }
 threadBtnInterval = setInterval(checkThreadBtn, 1000)
+
