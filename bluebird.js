@@ -137,7 +137,7 @@ function checkAriaLink(target) {
 }
 function ariaLink(target) {
     spans = target.getElementsByTagName("span")
-    if ( spans != null ) {
+    if ( spans != null && spans.length > 0) {
       spans[0].innerText = target.getAttribute("aria-label");
     }
 }
