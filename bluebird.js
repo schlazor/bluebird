@@ -127,3 +127,30 @@ function checkThreadBtn() {
 }
 threadBtnInterval = setInterval(checkThreadBtn, 1000)
 
+function checkAriaLink(target) {
+  ariaLinks = document.querySelectorAll("div[aria-hidden=\"true\"] > a")
+  if (ariaLinks != null) {
+    ariaLinks.forEach(function (currentValue, currentIndex, listObj) {
+      ariaLink(currentValue);
+    });
+  }
+}
+function ariaLink(target) {
+    spans = target.getElementsByTagName("span")
+    if ( spans != null ) {
+      spans[0].innerText = target.getAttribute("aria-label");
+    }
+}
+timelineSelector = "div[style*=\"position: relative;\"]";
+function checkForTimeline() {
+  tl = document.querySelector(timelineSelector);
+  if (tl != null) {
+    ariaLinks = document.querySelectorAll("div[aria-hidden=\"true\"] > a")
+    if (ariaLinks != null) {
+      ariaLinks.forEach(function (currentValue, currentIndex, listObj) {
+        ariaLink(currentValue);
+      });
+    }
+  }
+}
+tlInterval = setInterval(checkForTimeline, 5000);
