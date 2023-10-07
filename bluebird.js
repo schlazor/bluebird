@@ -136,10 +136,30 @@ function checkAriaLink(target) {
   }
 }
 function ariaLink(target) {
-    spans = target.getElementsByTagName("span")
-    if ( spans != null && spans.length > 0) {
-      spans[0].innerText = target.getAttribute("aria-label");
+  spans = target.getElementsByTagName("span")
+  if ( spans != null && spans.length > 0) {
+    div = document.createElement("div")
+    ariaLabel = target.getAttribute("aria-label")
+    headline = ariaLabel//.substring(ariaLabel.indexOf(" - ") + 3)
+    if (spans[0].parentNode.lastChild.tagName == "SPAN") {
+      console.log("last child is span")
+      spans[0].parentNode.appendChild(div)
+      spans[0].innerText = ariaLabel
+
+      // style
+      boxWidth = spans[0].parentNode.parentNode.parentNode.parentNode.offsetWidth
+      boxHeight = spans[0].parentNode.parentNode.offsetHeight * 2.5
+      spans[0].parentNode.parentNode.style.height = boxHeight + "px"
+      spans[0].parentNode.parentNode.style.paddingLeft = "32px"
+      spans[0].parentNode.parentNode.style.borderRadius = "0px"
+      spans[0].parentNode.parentNode.style.width = boxWidth + "px"
+      spans[0].parentNode.style.width = boxWidth + "px"
+      spans[0].parentNode.style.textAlign = "left"
+      spans[0].parentNode.parentNode.parentNode.style.left = "0px"
+      spans[0].parentNode.parentNode.parentNode.style.bottom = "0px"
+      spans[0].parentNode.parentNode.style.backgroundColor = "black"
     }
+  }
 }
 timelineSelector = "div[style*=\"position: relative;\"]";
 function checkForTimeline() {
